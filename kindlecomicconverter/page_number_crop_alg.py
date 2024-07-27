@@ -8,9 +8,9 @@ We assume that the size of the number (including all digits) is between
 We assume the distance between the digit is no more than 'max_dist_size' (x,y), and no more than 3 digits.
 '''
 max_shape_size_tolerated_size = (0.015*3, 0.02) # percent
-min_shape_size_tolerated_size = (0.01, 0.005)  # percent
+min_shape_size_tolerated_size = (0.003, 0.006)  # percent
 window_h_size = max_shape_size_tolerated_size[1]*1.25 # percent
-max_dist_size = (0.007, 0.002) # percent
+max_dist_size = (0.01, 0.002) # percent
 
 
 '''
