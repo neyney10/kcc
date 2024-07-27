@@ -167,7 +167,7 @@ def merge_boxes(boxes, max_dist_tolerated):
                 np.max(intersecting_boxes[:,3])
             ])
             other_boxes.append(merged_box)
-            boxes = other_boxes
+            boxes = np.concatenate([boxes[:j], other_boxes])
             j = 0
         else:
             j += 1
