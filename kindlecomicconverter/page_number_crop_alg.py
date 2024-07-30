@@ -1,6 +1,4 @@
 from PIL import ImageOps, ImageFilter
-import numpy as np
-
 '''
 Some assupmptions on the page number sizes
 We assume that the size of the number (including all digits) is between
@@ -51,6 +49,7 @@ def get_bbox_crop_margin_page_number(img, power=1, background_color='white'):
     threshold = threshold_from_power(power)
     bw_img = img.point(lambda p: 255 if p <= threshold else 0)
     left, top_y_pos, right, bot_y_pos = bw_img.getbbox()
+
     
     '''
     We inspect the lower bottom part of the image where we suspect might be a page number.
@@ -65,13 +64,12 @@ def get_bbox_crop_margin_page_number(img, power=1, background_color='white'):
     Related pixels (in x axis) for each image-row are then merged to boxes with adjacent rows (in y axis)
     to form bounding boxes of the detected objects (which one of them could be the page number).
     '''
-    img_part_mat = np.array(img_part)
     window_groups = []
     for i in range(img_part.size[1]):
-        row_groups = [(g[0], g[1], i, i) for g in group_pixels(img_part_mat[i], img.size[0]*max_dist_size[0], threshold)]
+        row_groups = [(g[0], g[1], i, i) for g in group_pixels(img_to_mat(img_part.crop((0,i,img_part.size[0],i+1)))[0], 
+                                                               img.size[0]*max_dist_size[0], 
+                                                               threshold)]
         window_groups.extend(row_groups)
-
-    window_groups = np.array(window_groups)
 
     boxes = merge_boxes(window_groups, (img.size[0]*max_dist_size[0], img.size[1]*max_dist_size[1]))
     '''
@@ -86,7 +84,7 @@ def get_bbox_crop_margin_page_number(img, power=1, background_color='white'):
     
     min_y_of_lowest_boxes = 0
     if len(lowest_boxes) > 0:
-        min_y_of_lowest_boxes = np.min(np.array(lowest_boxes)[:,2])
+        min_y_of_lowest_boxes = min(arr_slice_col(lowest_boxes, 2))
     
     boxes_in_same_y_range = list(filter(lambda box: box[3] >= min_y_of_lowest_boxes, boxes))
 
@@ -104,7 +102,6 @@ def get_bbox_crop_margin_page_number(img, power=1, background_color='white'):
         cropped_bbox = (0, 0, img.size[0], bot_y_pos-(window_h-boxes_in_same_y_range[0][2]+1))
 
     cropped_bbox = bw_img.crop(cropped_bbox).getbbox()
-    
     return cropped_bbox
 
 
@@ -113,7 +110,7 @@ Groups close pixels together (x axis)
 '''
 def group_pixels(row, max_dist_tolerated, threshold):
     groups = []
-    idx = np.where(row <= threshold)[0]
+    idx = arr_where(row, lambda n: n <= threshold)
 
     group_start = -1
     group_end = 0
@@ -159,15 +156,15 @@ def merge_boxes(boxes, max_dist_tolerated):
                 other_boxes.append(g2)
         
         if len(intersecting_boxes) > 0:
-            intersecting_boxes = np.array([g1, *intersecting_boxes])
-            merged_box = np.array([
-                np.min(intersecting_boxes[:,0]), 
-                np.max(intersecting_boxes[:,1]),
-                np.min(intersecting_boxes[:,2]), 
-                np.max(intersecting_boxes[:,3])
-            ])
+            intersecting_boxes.insert(0, g1)
+            merged_box = (
+                min(arr_slice_col(intersecting_boxes, 0)), 
+                max(arr_slice_col(intersecting_boxes, 1)),
+                min(arr_slice_col(intersecting_boxes, 2)), 
+                max(arr_slice_col(intersecting_boxes, 3))
+            )
             other_boxes.append(merged_box)
-            boxes = np.concatenate([boxes[:j], other_boxes])
+            boxes = [*boxes[:j], *other_boxes]
             j = 0
         else:
             j += 1
@@ -176,3 +173,37 @@ def merge_boxes(boxes, max_dist_tolerated):
 
 def threshold_from_power(power):
     return 240-(power*64)
+
+
+''' 
+---------------------------
+NumPy replacement functions
+---------------------------
+'''
+def arr_where(arr, cond):
+    indices = []
+    for i in range(len(arr)):
+        if cond(arr[i]):
+            indices.append(i)
+    
+    return indices
+
+
+def arr_slice_col(arr, col):
+    sliced = []
+    for i in range(len(arr)):
+        sliced.append(arr[i][col])
+        
+    return sliced
+
+
+def img_to_mat(img):
+    mat = []
+    img_data = img.getdata()
+    for i in range(img.size[1]):
+        row = []
+        for j in range(img.size[0]):
+            row.append(img_data[(i * img.size[0]) + j])
+        mat.append(row)
+        
+    return mat

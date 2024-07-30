@@ -83,8 +83,7 @@ setuptools.setup(
         'requests>=2.31.0',
         'mozjpeg-lossless-optimization>=1.1.2',
         'natsort[fast]>=8.4.0',
-        'distro',
-        'numpy>=1.22.4,<2.0.0'
+        'distro'
     ],
     classifiers=[],
     zip_safe=False,
