@@ -25,6 +25,7 @@ import mozjpeg_lossless_optimization
 from PIL import Image, ImageOps, ImageStat, ImageChops, ImageFilter
 from .page_number_crop_alg import get_bbox_crop_margin_page_number, get_bbox_crop_margin
 from .inter_panel_crop_alg import crop_empty_inter_panel
+from .add_margins_alg import addMargins
 
 AUTO_CROP_THRESHOLD = 0.015
 
@@ -361,19 +362,36 @@ class ComicPage:
         # kindle scribe conversion to mobi is limited in resolution by kindlegen, same with send to kindle and epub
         if self.kindle_scribe_azw3:
             self.size = (1440, 1920)
-        ratio_device = float(self.size[1]) / float(self.size[0])
-        ratio_image = float(self.image.size[1]) / float(self.image.size[0])
+        
+        if self.opt.margins:
+            left, top, right, bot = self.opt.margins
+            content_size = (self.size[0] - (left + right), self.size[1] - (top + bot))
+        else:
+            content_size = self.size
+            
         method = self.resize_method()
         if self.opt.stretch:
-            self.image = self.image.resize(self.size, method)
+            self.image = self.image.resize(content_size, method)
+            if self.opt.margins:
+                self.image = ImageOps.expand(self.image, self.opt.margins, fill=self.fill)
         elif method == Image.Resampling.BICUBIC and not self.opt.upscale:
             if self.opt.format == 'CBZ' or self.opt.kfx:
                 borderw = int((self.size[0] - self.image.size[0]) / 2)
                 borderh = int((self.size[1] - self.image.size[1]) / 2)
-                self.image = ImageOps.expand(self.image, border=(borderw, borderh), fill=self.fill)
+                if self.opt.margins:
+                    left, top, right, bot = self.opt.margins
+                    left, right = max(left, borderw), max(right, borderw)
+                    top, bot = max(top, borderh), max(bot, borderh)
+                    margins = (left, top, right, bot)
+                    print("margins", self.image.size, self.size, margins)
+                    self.image = ImageOps.expand(self.image, margins, fill=self.fill)
+                else:
+                    self.image = ImageOps.expand(self.image, border=(borderw, borderh), fill=self.fill)
                 if self.image.size[0] != self.size[0] or self.image.size[1] != self.size[1]:
                     self.image = ImageOps.fit(self.image, self.size, method=method)
         else: # if image bigger than device resolution or smaller with upscaling
+            ratio_device = float(self.size[1]) / float(self.size[0])
+            ratio_image = float(self.image.size[1]) / float(self.image.size[0])
             if abs(ratio_image - ratio_device) < AUTO_CROP_THRESHOLD:
                 self.image = ImageOps.fit(self.image, self.size, method=method)
             elif self.opt.format == 'CBZ' or self.opt.kfx:
@@ -381,13 +399,21 @@ class ComicPage:
             else:
                 if self.kindle_scribe_azw3:
                     self.size = (1860, 1920)
-                self.image = ImageOps.contain(self.image, self.size, method=method)
+                self.image = ImageOps.contain(self.image, content_size, method=method)
+            if self.opt.margins:
+                self.image = addMargins(self.image, *self.opt.margins, self.fill)
 
     def resize_method(self):
         if self.image.size[0] <= self.size[0] and self.image.size[1] <= self.size[1]:
             return Image.Resampling.BICUBIC
         else:
             return Image.Resampling.LANCZOS
+
+    def addMargins(self, left, top, right, bottom):
+        ssize = (self.size[0] - (left+right), self.size[1] - (top+bottom))
+        result = ImageOps.contain(self.image, ssize)
+        result = ImageOps.expand(result, (left, top, right, bottom), fill=self.fill)
+        self.image = result
 
     def maybeCrop(self, box, minimum):
         box_area = (box[2] - box[0]) * (box[3] - box[1])
