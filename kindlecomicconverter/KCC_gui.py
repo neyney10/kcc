@@ -245,6 +245,10 @@ class WorkerThread(QThread):
         if GUI.croppingBox.checkState() != Qt.CheckState.Unchecked:
             options.croppingp = float(GUI.croppingPowerValue)
         options.interpanelcrop = GUI.interPanelCropBox.checkState().value
+        if GUI.marginsBox.isChecked():
+            options.margins = (GUI.leftBox.value(), GUI.topBox.value(), GUI.rightBox.value(), GUI.botBox.value())
+        else:
+            options.margins = None
         if GUI.borderBox.checkState() == Qt.CheckState.PartiallyChecked:
             options.white_borders = True
         elif GUI.borderBox.checkState() == Qt.CheckState.Checked:
@@ -555,6 +559,7 @@ class KCCGUI(KCC_ui.Ui_mainWindow):
         GUI.optionWidget.setEnabled(status)
         GUI.gammaWidget.setEnabled(status)
         GUI.customWidget.setEnabled(status)
+        GUI.marginsWidget.setEnabled(status)
         GUI.convertButton.setEnabled(True)
         if enable == 1:
             self.conversionAlive = False
@@ -592,6 +597,9 @@ class KCCGUI(KCC_ui.Ui_mainWindow):
         else:
             GUI.croppingWidget.setVisible(False)
             self.changeCroppingPower(100)  # 1.0
+            
+    def toggleMarginsgBox(self, value):
+        GUI.marginsWidget.setVisible(value)
 
     def togglewebtoonBox(self, value):
         if value:
@@ -802,7 +810,9 @@ class KCCGUI(KCC_ui.Ui_mainWindow):
                                            'spreadShiftBox': GUI.spreadShiftBox.checkState().value,
                                            'noRotateBox': GUI.noRotateBox.checkState().value,
                                            'maximizeStrips': GUI.maximizeStrips.checkState().value,
-                                           'gammaSlider': float(self.gammaValue) * 100})
+                                           'gammaSlider': float(self.gammaValue) * 100,
+                                           'marginsBox': GUI.marginsBox.checkState().value,
+                                           'margins': (GUI.leftBox.value(), GUI.topBox.value(), GUI.rightBox.value(), GUI.botBox.value())})
         self.settings.sync()
         self.tray.hide()
 
@@ -1086,6 +1096,8 @@ class KCCGUI(KCC_ui.Ui_mainWindow):
         GUI.gammaBox.stateChanged.connect(self.togglegammaBox)
         GUI.croppingBox.stateChanged.connect(self.togglecroppingBox)
         GUI.croppingPowerSlider.valueChanged.connect(self.changeCroppingPower)
+        GUI.marginsBox.stateChanged.connect(self.toggleMarginsgBox)
+        GUI.marginsWidget.setVisible(False)
         GUI.webtoonBox.stateChanged.connect(self.togglewebtoonBox)
         GUI.qualityBox.stateChanged.connect(self.togglequalityBox)
         GUI.deviceBox.activated.connect(self.changeDevice)
@@ -1140,6 +1152,14 @@ class KCCGUI(KCC_ui.Ui_mainWindow):
                 if GUI.croppingPowerSlider.isEnabled():
                     GUI.croppingPowerSlider.setValue(int(self.options[option]))
                     self.changeCroppingPower(int(self.options[option]))
+            elif str(option) == "margins":
+                if GUI.marginsBox.isEnabled():
+                    margins = self.options[option]
+                    if margins:
+                        GUI.leftBox.setValue(margins[0])
+                        GUI.topBox.setValue(margins[1])
+                        GUI.rightBox.setValue(margins[2])
+                        GUI.botBox.setValue(margins[3])
             else:
                 try:
                     if getattr(GUI, option).isEnabled():

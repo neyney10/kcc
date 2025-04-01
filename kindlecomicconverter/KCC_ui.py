@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'KCC.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -26,7 +26,7 @@ class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
         if not mainWindow.objectName():
             mainWindow.setObjectName(u"mainWindow")
-        mainWindow.resize(482, 448)
+        mainWindow.resize(482, 479)
         icon = QIcon()
         icon.addFile(u":/Icon/icons/comic2ebook.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         mainWindow.setWindowIcon(icon)
@@ -149,8 +149,71 @@ class Ui_mainWindow(object):
 
         self.gridLayout_2.addWidget(self.reduceRainbowBox, 7, 2, 1, 1)
 
+        self.marginsBox = QCheckBox(self.optionWidget)
+        self.marginsBox.setObjectName(u"marginsBox")
 
-        self.gridLayout.addWidget(self.optionWidget, 5, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.marginsBox, 7, 1, 1, 1)
+
+
+        self.gridLayout.addWidget(self.optionWidget, 6, 0, 1, 2)
+
+        self.progressBar = QProgressBar(self.centralWidget)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMinimumSize(QSize(0, 30))
+        font = QFont()
+        font.setBold(True)
+        self.progressBar.setFont(font)
+        self.progressBar.setVisible(False)
+        self.progressBar.setAlignment(Qt.AlignmentFlag.AlignJustify|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout.addWidget(self.progressBar, 2, 0, 1, 2)
+
+        self.jobList = QListWidget(self.centralWidget)
+        self.jobList.setObjectName(u"jobList")
+        self.jobList.setStyleSheet(u"")
+        self.jobList.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.jobList.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.jobList.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+
+        self.gridLayout.addWidget(self.jobList, 3, 0, 1, 2)
+
+        self.customWidget = QWidget(self.centralWidget)
+        self.customWidget.setObjectName(u"customWidget")
+        self.customWidget.setVisible(False)
+        self.gridLayout_3 = QGridLayout(self.customWidget)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.hLabel = QLabel(self.customWidget)
+        self.hLabel.setObjectName(u"hLabel")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.hLabel.sizePolicy().hasHeightForWidth())
+        self.hLabel.setSizePolicy(sizePolicy1)
+
+        self.gridLayout_3.addWidget(self.hLabel, 0, 2, 1, 1)
+
+        self.widthBox = QSpinBox(self.customWidget)
+        self.widthBox.setObjectName(u"widthBox")
+        self.widthBox.setMaximum(2160)
+
+        self.gridLayout_3.addWidget(self.widthBox, 0, 1, 1, 1)
+
+        self.wLabel = QLabel(self.customWidget)
+        self.wLabel.setObjectName(u"wLabel")
+        sizePolicy1.setHeightForWidth(self.wLabel.sizePolicy().hasHeightForWidth())
+        self.wLabel.setSizePolicy(sizePolicy1)
+
+        self.gridLayout_3.addWidget(self.wLabel, 0, 0, 1, 1)
+
+        self.heightBox = QSpinBox(self.customWidget)
+        self.heightBox.setObjectName(u"heightBox")
+        self.heightBox.setMaximum(3840)
+
+        self.gridLayout_3.addWidget(self.heightBox, 0, 3, 1, 1)
+
+
+        self.gridLayout.addWidget(self.customWidget, 9, 0, 1, 2)
 
         self.gammaWidget = QWidget(self.centralWidget)
         self.gammaWidget.setObjectName(u"gammaWidget")
@@ -172,7 +235,7 @@ class Ui_mainWindow(object):
         self.horizontalLayout_2.addWidget(self.gammaSlider)
 
 
-        self.gridLayout.addWidget(self.gammaWidget, 6, 0, 1, 2)
+        self.gridLayout.addWidget(self.gammaWidget, 8, 0, 1, 2)
 
         self.croppingWidget = QWidget(self.centralWidget)
         self.croppingWidget.setObjectName(u"croppingWidget")
@@ -194,33 +257,59 @@ class Ui_mainWindow(object):
         self.horizontalLayout_3.addWidget(self.croppingPowerSlider)
 
 
-        self.gridLayout.addWidget(self.croppingWidget, 8, 0, 1, 2)
+        self.gridLayout.addWidget(self.croppingWidget, 10, 0, 1, 2)
+
+        self.toolWidget = QWidget(self.centralWidget)
+        self.toolWidget.setObjectName(u"toolWidget")
+        self.horizontalLayout = QHBoxLayout(self.toolWidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.editorButton = QPushButton(self.toolWidget)
+        self.editorButton.setObjectName(u"editorButton")
+        self.editorButton.setMinimumSize(QSize(0, 30))
+        icon1 = QIcon()
+        icon1.addFile(u":/Other/icons/editor.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.editorButton.setIcon(icon1)
+
+        self.horizontalLayout.addWidget(self.editorButton)
+
+        self.wikiButton = QPushButton(self.toolWidget)
+        self.wikiButton.setObjectName(u"wikiButton")
+        self.wikiButton.setMinimumSize(QSize(0, 30))
+        icon2 = QIcon()
+        icon2.addFile(u":/Other/icons/wiki.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.wikiButton.setIcon(icon2)
+
+        self.horizontalLayout.addWidget(self.wikiButton)
+
+
+        self.gridLayout.addWidget(self.toolWidget, 1, 0, 1, 2)
 
         self.buttonWidget = QWidget(self.centralWidget)
         self.buttonWidget.setObjectName(u"buttonWidget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.buttonWidget.sizePolicy().hasHeightForWidth())
-        self.buttonWidget.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.buttonWidget.sizePolicy().hasHeightForWidth())
+        self.buttonWidget.setSizePolicy(sizePolicy2)
         self.gridLayout_4 = QGridLayout(self.buttonWidget)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
         self.directoryButton = QPushButton(self.buttonWidget)
         self.directoryButton.setObjectName(u"directoryButton")
         self.directoryButton.setMinimumSize(QSize(0, 30))
-        icon1 = QIcon()
-        icon1.addFile(u":/Other/icons/folder_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.directoryButton.setIcon(icon1)
+        icon3 = QIcon()
+        icon3.addFile(u":/Other/icons/folder_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.directoryButton.setIcon(icon3)
 
         self.gridLayout_4.addWidget(self.directoryButton, 0, 0, 1, 1)
 
         self.fileButton = QPushButton(self.buttonWidget)
         self.fileButton.setObjectName(u"fileButton")
         self.fileButton.setMinimumSize(QSize(0, 30))
-        icon2 = QIcon()
-        icon2.addFile(u":/Other/icons/document_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.fileButton.setIcon(icon2)
+        icon4 = QIcon()
+        icon4.addFile(u":/Other/icons/document_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.fileButton.setIcon(icon4)
 
         self.gridLayout_4.addWidget(self.fileButton, 0, 3, 1, 1)
 
@@ -239,21 +328,19 @@ class Ui_mainWindow(object):
         self.convertButton = QPushButton(self.buttonWidget)
         self.convertButton.setObjectName(u"convertButton")
         self.convertButton.setMinimumSize(QSize(0, 30))
-        font = QFont()
-        font.setBold(True)
         self.convertButton.setFont(font)
-        icon3 = QIcon()
-        icon3.addFile(u":/Other/icons/convert.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.convertButton.setIcon(icon3)
+        icon5 = QIcon()
+        icon5.addFile(u":/Other/icons/convert.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.convertButton.setIcon(icon5)
 
         self.gridLayout_4.addWidget(self.convertButton, 1, 2, 1, 1)
 
         self.clearButton = QPushButton(self.buttonWidget)
         self.clearButton.setObjectName(u"clearButton")
         self.clearButton.setMinimumSize(QSize(0, 30))
-        icon4 = QIcon()
-        icon4.addFile(u":/Other/icons/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.clearButton.setIcon(icon4)
+        icon6 = QIcon()
+        icon6.addFile(u":/Other/icons/clear.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.clearButton.setIcon(icon6)
 
         self.gridLayout_4.addWidget(self.clearButton, 0, 2, 1, 1)
 
@@ -264,89 +351,42 @@ class Ui_mainWindow(object):
         self.convertButton.raise_()
         self.formatBox.raise_()
 
-        self.gridLayout.addWidget(self.buttonWidget, 3, 0, 1, 2)
+        self.gridLayout.addWidget(self.buttonWidget, 4, 0, 1, 2)
 
-        self.toolWidget = QWidget(self.centralWidget)
-        self.toolWidget.setObjectName(u"toolWidget")
-        self.horizontalLayout = QHBoxLayout(self.toolWidget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.editorButton = QPushButton(self.toolWidget)
-        self.editorButton.setObjectName(u"editorButton")
-        self.editorButton.setMinimumSize(QSize(0, 30))
-        icon5 = QIcon()
-        icon5.addFile(u":/Other/icons/editor.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.editorButton.setIcon(icon5)
+        self.marginsWidget = QWidget(self.centralWidget)
+        self.marginsWidget.setObjectName(u"marginsWidget")
+        self.marginsWidget.setEnabled(True)
+        self.marginsWidget.setVisible(False)
+        self.horizontalLayout_4 = QHBoxLayout(self.marginsWidget)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.marginslabel = QLabel(self.marginsWidget)
+        self.marginslabel.setObjectName(u"marginslabel")
 
-        self.horizontalLayout.addWidget(self.editorButton)
+        self.horizontalLayout_4.addWidget(self.marginslabel)
 
-        self.wikiButton = QPushButton(self.toolWidget)
-        self.wikiButton.setObjectName(u"wikiButton")
-        self.wikiButton.setMinimumSize(QSize(0, 30))
-        icon6 = QIcon()
-        icon6.addFile(u":/Other/icons/wiki.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.wikiButton.setIcon(icon6)
+        self.leftBox = QSpinBox(self.marginsWidget)
+        self.leftBox.setObjectName(u"leftBox")
 
-        self.horizontalLayout.addWidget(self.wikiButton)
+        self.horizontalLayout_4.addWidget(self.leftBox)
 
+        self.rightBox = QSpinBox(self.marginsWidget)
+        self.rightBox.setObjectName(u"rightBox")
 
-        self.gridLayout.addWidget(self.toolWidget, 0, 0, 1, 2)
+        self.horizontalLayout_4.addWidget(self.rightBox)
 
-        self.jobList = QListWidget(self.centralWidget)
-        self.jobList.setObjectName(u"jobList")
-        self.jobList.setStyleSheet(u"")
-        self.jobList.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
-        self.jobList.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
-        self.jobList.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.topBox = QSpinBox(self.marginsWidget)
+        self.topBox.setObjectName(u"topBox")
 
-        self.gridLayout.addWidget(self.jobList, 2, 0, 1, 2)
+        self.horizontalLayout_4.addWidget(self.topBox)
 
-        self.progressBar = QProgressBar(self.centralWidget)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setMinimumSize(QSize(0, 30))
-        self.progressBar.setFont(font)
-        self.progressBar.setVisible(False)
-        self.progressBar.setAlignment(Qt.AlignmentFlag.AlignJustify|Qt.AlignmentFlag.AlignVCenter)
+        self.botBox = QSpinBox(self.marginsWidget)
+        self.botBox.setObjectName(u"botBox")
 
-        self.gridLayout.addWidget(self.progressBar, 1, 0, 1, 2)
-
-        self.customWidget = QWidget(self.centralWidget)
-        self.customWidget.setObjectName(u"customWidget")
-        self.customWidget.setVisible(False)
-        self.gridLayout_3 = QGridLayout(self.customWidget)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.hLabel = QLabel(self.customWidget)
-        self.hLabel.setObjectName(u"hLabel")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.hLabel.sizePolicy().hasHeightForWidth())
-        self.hLabel.setSizePolicy(sizePolicy2)
-
-        self.gridLayout_3.addWidget(self.hLabel, 0, 2, 1, 1)
-
-        self.widthBox = QSpinBox(self.customWidget)
-        self.widthBox.setObjectName(u"widthBox")
-        self.widthBox.setMaximum(2160)
-
-        self.gridLayout_3.addWidget(self.widthBox, 0, 1, 1, 1)
-
-        self.wLabel = QLabel(self.customWidget)
-        self.wLabel.setObjectName(u"wLabel")
-        sizePolicy2.setHeightForWidth(self.wLabel.sizePolicy().hasHeightForWidth())
-        self.wLabel.setSizePolicy(sizePolicy2)
-
-        self.gridLayout_3.addWidget(self.wLabel, 0, 0, 1, 1)
-
-        self.heightBox = QSpinBox(self.customWidget)
-        self.heightBox.setObjectName(u"heightBox")
-        self.heightBox.setMaximum(3840)
-
-        self.gridLayout_3.addWidget(self.heightBox, 0, 3, 1, 1)
+        self.horizontalLayout_4.addWidget(self.botBox)
 
 
-        self.gridLayout.addWidget(self.customWidget, 7, 0, 1, 2)
+        self.gridLayout.addWidget(self.marginsWidget, 7, 0, 1, 1)
 
         mainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QStatusBar(mainWindow)
@@ -463,8 +503,28 @@ class Ui_mainWindow(object):
         self.reduceRainbowBox.setToolTip(QCoreApplication.translate("mainWindow", u"Reduce rainbow effect on color eink by slightly blurring images", None))
 #endif // QT_CONFIG(tooltip)
         self.reduceRainbowBox.setText(QCoreApplication.translate("mainWindow", u"Reduce Rainbow", None))
+        self.marginsBox.setText(QCoreApplication.translate("mainWindow", u"Add margins", None))
+#if QT_CONFIG(tooltip)
+        self.hLabel.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.hLabel.setText(QCoreApplication.translate("mainWindow", u"Custom height:", None))
+#if QT_CONFIG(tooltip)
+        self.widthBox.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.wLabel.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.wLabel.setText(QCoreApplication.translate("mainWindow", u"Custom width:", None))
+#if QT_CONFIG(tooltip)
+        self.heightBox.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.gammaLabel.setText(QCoreApplication.translate("mainWindow", u"Gamma: Auto", None))
         self.croppingPowerLabel.setText(QCoreApplication.translate("mainWindow", u"Cropping power:", None))
+#if QT_CONFIG(tooltip)
+        self.editorButton.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Shift+Click to edit directory.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.editorButton.setText(QCoreApplication.translate("mainWindow", u"Metadata Editor", None))
+        self.wikiButton.setText(QCoreApplication.translate("mainWindow", u"Wiki", None))
 #if QT_CONFIG(tooltip)
         self.directoryButton.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Add directory containing JPG, PNG or GIF files to queue.<br/><span style=\" font-weight:600;\">CBR, CBZ and CB7 files inside will not be processed!</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -484,24 +544,10 @@ class Ui_mainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.convertButton.setText(QCoreApplication.translate("mainWindow", u"Convert", None))
         self.clearButton.setText(QCoreApplication.translate("mainWindow", u"Clear list", None))
-#if QT_CONFIG(tooltip)
-        self.editorButton.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Shift+Click to edit directory.</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.editorButton.setText(QCoreApplication.translate("mainWindow", u"Metadata Editor", None))
-        self.wikiButton.setText(QCoreApplication.translate("mainWindow", u"Wiki", None))
-#if QT_CONFIG(tooltip)
-        self.hLabel.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.hLabel.setText(QCoreApplication.translate("mainWindow", u"Custom height:", None))
-#if QT_CONFIG(tooltip)
-        self.widthBox.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.wLabel.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.wLabel.setText(QCoreApplication.translate("mainWindow", u"Custom width:", None))
-#if QT_CONFIG(tooltip)
-        self.heightBox.setToolTip(QCoreApplication.translate("mainWindow", u"<html><head/><body><p style='white-space:pre'>Resolution of the target device.</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
+        self.marginslabel.setText(QCoreApplication.translate("mainWindow", u"Margins: ", None))
+        self.leftBox.setPrefix(QCoreApplication.translate("mainWindow", u"Left: ", None))
+        self.rightBox.setPrefix(QCoreApplication.translate("mainWindow", u"Right: ", None))
+        self.topBox.setPrefix(QCoreApplication.translate("mainWindow", u"Top: ", None))
+        self.botBox.setPrefix(QCoreApplication.translate("mainWindow", u"Bottom: ", None))
     # retranslateUi
 

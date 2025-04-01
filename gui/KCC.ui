@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>482</width>
-    <height>448</height>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <property name="bottomMargin">
      <number>5</number>
     </property>
-    <item row="5" column="0" colspan="2">
+    <item row="6" column="0" colspan="2">
      <widget class="QWidget" name="optionWidget" native="true">
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
@@ -260,10 +260,127 @@
          </property>
         </widget>
        </item>
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="marginsBox">
+         <property name="text">
+          <string>Add margins</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
-    <item row="6" column="0" colspan="2">
+    <item row="2" column="0" colspan="2">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="visible">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QListWidget" name="jobList">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
+      </property>
+      <property name="verticalScrollMode">
+       <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+      </property>
+      <property name="horizontalScrollMode">
+       <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" colspan="2">
+     <widget class="QWidget" name="customWidget" native="true">
+      <property name="visible">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="2">
+        <widget class="QLabel" name="hLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Custom height:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="widthBox">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maximum">
+          <number>2160</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="wLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Custom width:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QSpinBox" name="heightBox">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maximum">
+          <number>3840</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="8" column="0" colspan="2">
      <widget class="QWidget" name="gammaWidget" native="true">
       <property name="visible">
        <bool>false</bool>
@@ -304,7 +421,7 @@
       </layout>
      </widget>
     </item>
-    <item row="8" column="0" colspan="2">
+    <item row="10" column="0" colspan="2">
      <widget class="QWidget" name="croppingWidget" native="true">
       <property name="visible">
        <bool>false</bool>
@@ -345,7 +462,62 @@
       </layout>
      </widget>
     </item>
-    <item row="3" column="0" colspan="2">
+    <item row="1" column="0" colspan="2">
+     <widget class="QWidget" name="toolWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="editorButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Shift+Click to edit directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Metadata Editor</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KCC.qrc">
+           <normaloff>:/Other/icons/editor.png</normaloff>:/Other/icons/editor.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="wikiButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Wiki</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KCC.qrc">
+           <normaloff>:/Other/icons/wiki.png</normaloff>:/Other/icons/wiki.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="2">
      <widget class="QWidget" name="buttonWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -483,9 +655,15 @@
       <zorder>formatBox</zorder>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
-     <widget class="QWidget" name="toolWidget" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout">
+    <item row="7" column="0">
+     <widget class="QWidget" name="marginsWidget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="visible">
+       <bool>false</bool>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -499,149 +677,37 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="editorButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Shift+Click to edit directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
+        <widget class="QLabel" name="marginslabel">
          <property name="text">
-          <string>Metadata Editor</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KCC.qrc">
-           <normaloff>:/Other/icons/editor.png</normaloff>:/Other/icons/editor.png</iconset>
+          <string>Margins: </string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="wikiButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Wiki</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KCC.qrc">
-           <normaloff>:/Other/icons/wiki.png</normaloff>:/Other/icons/wiki.png</iconset>
+        <widget class="QSpinBox" name="leftBox">
+         <property name="prefix">
+          <string>Left: </string>
          </property>
         </widget>
        </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QListWidget" name="jobList">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
-      </property>
-      <property name="verticalScrollMode">
-       <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
-      </property>
-      <property name="horizontalScrollMode">
-       <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QProgressBar" name="progressBar">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="visible">
-       <bool>false</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignJustify|Qt::AlignmentFlag::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QWidget" name="customWidget" native="true">
-      <property name="visible">
-       <bool>false</bool>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="2">
-        <widget class="QLabel" name="hLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>Custom height:</string>
+       <item>
+        <widget class="QSpinBox" name="rightBox">
+         <property name="prefix">
+          <string>Right: </string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="widthBox">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="maximum">
-          <number>2160</number>
+       <item>
+        <widget class="QSpinBox" name="topBox">
+         <property name="prefix">
+          <string>Top: </string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="wLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>Custom width:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QSpinBox" name="heightBox">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style='white-space:pre'&gt;Resolution of the target device.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="maximum">
-          <number>3840</number>
+       <item>
+        <widget class="QSpinBox" name="botBox">
+         <property name="prefix">
+          <string>Bottom: </string>
          </property>
         </widget>
        </item>
